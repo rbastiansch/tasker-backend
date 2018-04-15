@@ -10,7 +10,6 @@ app.get('/', (req, res) => {
   res.send('OK');
 });
 
-require('./app/controllers/authController')(app);
-require('./app/controllers/projectController')(app);
+require('./app/controllers/index')(app);
 
 app.listen(3000);
