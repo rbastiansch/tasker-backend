@@ -7,7 +7,12 @@ const router = express.Router();
 router.use(authMiddleware);
 
 router.get('/', async (req, res) => {
-  return res.send({ ok: 'true' });
+  try {
+    const projects = await Project.find().populate([ 'user', 'tasks' ]);
+    return res.send({ projects });
+  } catch (err) {
+    return res.status(400).send({ error: 'Error loading projects' });
+  }
 });
 
 router.post('/', async (req, res) => {
